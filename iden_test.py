@@ -6,7 +6,7 @@ import get_imagedata
 from iden_train import get_model,preprocess
 
 
-def iden_test(h_shift = 0,w_shift = 0, rota = 0, scal = 0, random_transform = False):
+def iden_test(h_shift = 0,w_shift = 0, rota = 0, scal = 0, random_transform = False,classes = 200):
     T = 16  
     img_col = 100
     img_row = 100
@@ -35,7 +35,7 @@ def iden_test(h_shift = 0,w_shift = 0, rota = 0, scal = 0, random_transform = Fa
 
 
     white_list_formats = {'png', 'jpg', 'jpeg', 'bmp'}
-    for class_num in range(1,201):
+    for class_num in range(1,classes+1):
         temp_path = os.path.join(directory,str(class_num))
         for sub_path in test_samples:
             abs_path = os.path.join(temp_path,str(sub_path))
@@ -51,7 +51,7 @@ def iden_test(h_shift = 0,w_shift = 0, rota = 0, scal = 0, random_transform = Fa
                 temp_filenames = sorted(temp_filenames,key=lambda x:int(x[-8:-4]))
 
             batch_size = len(temp_filenames) - sequence + 1 # TODO
-            frame_result = np.zeros((batch_size,200))
+            frame_result = np.zeros((batch_size,classes))
             seq_batch_x = np.zeros((batch_size, sequence) + img_shape, dtype=K.floatx())
             batch_x = np.zeros((sequence,)+img_shape,dtype=K.floatx())
             img_gen = get_imagedata.ImageDataGenerator(preprocessing_function=preprocess)

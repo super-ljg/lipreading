@@ -458,7 +458,7 @@ class ImageDataGenerator(object):
                                     seed=seed,rand_train_class=auth_rand_train)
 
 
-    def img_augment(self, x,rotation = 0,h_shift=0,w_shift=0,scale=1.0):
+    def img_augment(self, x,rotation = 0,h_shift=0,w_shift=0,scale=(1,1)):
         """augment a single image tensor.
 
         # Arguments
@@ -497,7 +497,7 @@ class ImageDataGenerator(object):
                                      [0, 0, 1]])
             transform_matrix = shift_matrix if transform_matrix is None else np.dot(transform_matrix, shift_matrix)
 
-        zx=zy=scale[0]
+        zx,zy = scale
         if zx != 1:
             zoom_matrix = np.array([[zx, 0, 0],
                                     [0, zy, 0],

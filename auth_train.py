@@ -29,7 +29,7 @@ def auth_train(client,random_class,train_samples):
     save_best = ModelCheckpoint('./weights/'+ str(client) + '.h5', monitor='val_loss', verbose=1,save_best_only=True)
     train_gen = get_imagedata.ImageDataGenerator(preprocessing_function=preprocess, client=client,
                                                  height_shift_range=0.1,width_shift_range=0.1,
-                                                 rotation_range=10,zoom_range=(0.8,1))
+                                                 rotation_range=10,zoom_range=(0.9,1))
     val_gen = get_imagedata.ImageDataGenerator(preprocessing_function=preprocess, client=client)
 
     model.fit_generator(
