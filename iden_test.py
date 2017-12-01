@@ -40,7 +40,7 @@ def iden_test(h_shift = 0,w_shift = 0, rota = 0, scal = 0, random_transform = Fa
         for sub_path in test_samples:
             abs_path = os.path.join(temp_path,str(sub_path))
             for root, _, files in _recursive_list(abs_path):
-                for fname in sorted(files):#  may have .DS_store file
+                for fname in sorted(files):
                     is_valid = False
                     for extension in white_list_formats:
                         if fname.lower().endswith('.' + extension):
